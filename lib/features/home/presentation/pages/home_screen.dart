@@ -6,6 +6,8 @@ import '../widgets/quick_action_card.dart';
 import '../widgets/readiness_card.dart';
 import '../widgets/recent_activity.dart';
 
+import '../../../resume/presentation/pages/upload_resume_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -43,7 +45,14 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.upload_file,
                     title: "Upload Resume",
                     color: Colors.blue,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const UploadResumeScreen(),
+                        ),
+                      );
+                    },
                   ),
 
                   QuickActionCard(
