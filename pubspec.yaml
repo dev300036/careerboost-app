@@ -41,6 +41,10 @@ dependencies:
   lottie: ^3.5.1
   flutter_screenutil: ^5.9.3
   file_selector: ^1.1.0
+  firebase_core: ^4.11.0
+  firebase_auth: ^6.5.4
+  cloud_firestore: ^6.6.0
+  firebase_storage: ^13.4.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

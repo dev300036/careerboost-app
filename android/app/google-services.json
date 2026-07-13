@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119720707462",
+    "project_id": "careerboost-f8577",
+    "storage_bucket": "careerboost-f8577.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119720707462:android:6062e1957d1cba34795807",
+        "android_client_info": {
+          "package_name": "com.example.cb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk1OEYU39H0oswkY_9_BtSKoN_G0L6UX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

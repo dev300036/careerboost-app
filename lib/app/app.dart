@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'routes/app_routes.dart';
 import 'theme/app_theme.dart';
 
+// Splash
+import '../features/splash/presentation/splash_screen.dart';
+
+// Home (future use)
 import '../features/home/presentation/pages/home_screen.dart';
 
 class CareerBoostApp extends StatelessWidget {
@@ -14,7 +17,7 @@ class CareerBoostApp extends StatelessWidget {
       title: 'CareerBoost',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

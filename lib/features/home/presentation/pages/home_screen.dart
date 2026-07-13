@@ -14,77 +14,83 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: const CustomBottomNav(),
 
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 120),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const HomeHeader(),
 
-          child: Column(
-            children: [
+                    const SizedBox(height: 25),
 
-              const HomeHeader(),
+                    const ReadinessCard(),
 
-              const SizedBox(height: 25),
+                    const SizedBox(height: 30),
 
-              const ReadinessCard(),
-
-              const SizedBox(height: 30),
-
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 18,
-                mainAxisSpacing: 18,
-                childAspectRatio: 1.05,
-
-                children: [
-
-                  QuickActionCard(
-                    icon: Icons.upload_file,
-                    title: "Upload Resume",
-                    color: Colors.blue,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const UploadResumeScreen(),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 18,
+                      mainAxisSpacing: 18,
+                      childAspectRatio: 0.95,
+                      children: [
+                        QuickActionCard(
+                          icon: Icons.upload_file,
+                          title: "Upload Resume",
+                          color: Colors.blue,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    const UploadResumeScreen(),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
 
-                  QuickActionCard(
-                    icon: Icons.analytics,
-                    title: "ATS Score",
-                    color: Colors.green,
-                    onTap: () {},
-                  ),
+                        QuickActionCard(
+                          icon: Icons.analytics,
+                          title: "ATS Score",
+                          color: Colors.green,
+                          onTap: () {},
+                        ),
 
-                  QuickActionCard(
-                    icon: Icons.mic,
-                    title: "Mock Interview",
-                    color: Colors.orange,
-                    onTap: () {},
-                  ),
+                        QuickActionCard(
+                          icon: Icons.mic,
+                          title: "Mock Interview",
+                          color: Colors.orange,
+                          onTap: () {},
+                        ),
 
-                  QuickActionCard(
-                    icon: Icons.psychology,
-                    title: "Skill Gap",
-                    color: Colors.purple,
-                    onTap: () {},
-                  ),
-                ],
+                        QuickActionCard(
+                          icon: Icons.psychology,
+                          title: "Skill Gap",
+                          color: Colors.purple,
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    const RecentActivity(),
+                  ],
+                ),
               ),
-
-              const SizedBox(height: 30),
-
-              const RecentActivity(),
-
-              const SizedBox(height: 30),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

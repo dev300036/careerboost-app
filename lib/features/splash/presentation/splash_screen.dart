@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_text_styles.dart';
 
-import '../../auth/presentation/pages/login_screen.dart';
+import '../../home/presentation/pages/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => const LoginScreen(),
+            builder: (_) => const HomeScreen(),
           ),
         );
       },
