@@ -8,6 +8,8 @@ import '../widgets/recent_activity.dart';
 
 import '../../../resume/presentation/pages/upload_resume_screen.dart';
 
+import '../../../ats/presentation/pages/ats_score_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -46,6 +48,20 @@ class HomeScreen extends StatelessWidget {
                       childAspectRatio: 0.95,
                       children: [
                         QuickActionCard(
+                          icon: Icons.analytics,
+                          title: "ATS Score",
+                          color: Colors.green,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AtsScoreScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        QuickActionCard(
                           icon: Icons.upload_file,
                           title: "Upload Resume",
                           color: Colors.blue,
@@ -53,20 +69,12 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) =>
-                                    const UploadResumeScreen(),
+                                builder: (_) => const UploadResumeScreen(),
                               ),
                             );
                           },
                         ),
-
-                        QuickActionCard(
-                          icon: Icons.analytics,
-                          title: "ATS Score",
-                          color: Colors.green,
-                          onTap: () {},
-                        ),
-
+              
                         QuickActionCard(
                           icon: Icons.mic,
                           title: "Mock Interview",

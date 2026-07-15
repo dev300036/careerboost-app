@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../profile/presentation/pages/profile_screen.dart';
+import '../../../resume/presentation/pages/upload_resume_screen.dart';
+
 class CustomBottomNav extends StatelessWidget {
   const CustomBottomNav({super.key});
 
@@ -7,6 +10,43 @@ class CustomBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationBar(
       selectedIndex: 0,
+
+      onDestinationSelected: (index) {
+        switch (index) {
+          case 0:
+            // Home
+            break;
+
+          case 1:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const UploadResumeScreen(),
+              ),
+            );
+            break;
+
+          case 2:
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  "Mock Interview Screen Coming Soon",
+                ),
+              ),
+            );
+            break;
+
+          case 3:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const ProfileScreen(),
+              ),
+            );
+            break;
+        }
+      },
+
       destinations: const [
         NavigationDestination(
           icon: Icon(Icons.home_outlined),
