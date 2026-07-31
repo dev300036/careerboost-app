@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:careerboost/core/services/storage_service.dart';
 
 import '../widgets/upload_box.dart';
+
 
 class UploadResumeScreen extends StatefulWidget {
   const UploadResumeScreen({super.key});
@@ -24,6 +28,19 @@ class _UploadResumeScreenState extends State<UploadResumeScreen> {
     );
 
     if (file != null) {
+      final size = File(file.path).lengthSync();
+
+      if (size > 10 * 1024 * 1024) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Resume size should be less than 10 MB",
+            ),
+          ),
+        );
+        return;
+      }
+
       setState(() {
         selectedResume = file;
       });
@@ -45,8 +62,7 @@ class _UploadResumeScreenState extends State<UploadResumeScreen> {
             ),
 
             const SizedBox(height: 25),
-
-            if (selectedResume != null)
+                        if (selectedResume != null) ...[
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
@@ -72,7 +88,8 @@ class _UploadResumeScreenState extends State<UploadResumeScreen> {
 
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
                         children: [
                           Text(
                             selectedResume!.name,
@@ -93,6 +110,16 @@ class _UploadResumeScreenState extends State<UploadResumeScreen> {
                               fontSize: 12,
                             ),
                           ),
+
+                          const SizedBox(height: 5),
+
+                          Text(
+                            "Size: ${(File(selectedResume!.path).lengthSync() / 1024).toStringAsFixed(2)} KB",
+                            style: TextStyle(
+                              color: Colors.grey.shade600,
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -108,6 +135,55 @@ class _UploadResumeScreenState extends State<UploadResumeScreen> {
                   ],
                 ),
               ),
+
+              const SizedBox(height: 30),
+
+              SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    if (selectedResume == null) return;
+
+                    try {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Uploading Resume..."),
+                        ),
+                      );
+
+                      final downloadUrl =
+                          await StorageService.instance.uploadResume(
+                        File(selectedResume!.path),
+                      );
+
+                      if (!context.mounted) return;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Resume uploaded successfully!"),
+                        ),
+                      );
+
+                      debugPrint(downloadUrl);
+                    } catch (e) {
+                      if (!context.mounted) return;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Upload Failed: $e"),
+                        ),
+                      );
+                    }
+                  },
+                  icon: const Icon(Icons.cloud_upload),
+                  label: const Text(
+                    "Upload Resume",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),
